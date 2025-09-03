@@ -1,0 +1,8 @@
+logging:
+  level:
+    root: info
+#    com.yourcompany: debug
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/app.log
