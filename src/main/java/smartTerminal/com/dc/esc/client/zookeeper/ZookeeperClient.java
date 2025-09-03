@@ -13,9 +13,9 @@ public interface ZookeeperClient {
 
     List<String> getChildren(String var1);
 
-    List<String> addChildren(String var1,ChildListener var2);
+    List<String> addChildListener(String var1,ChildListener var2);
 
-    void removeChildren(String var1,ChildListener var2);
+    void removeChildListener(String var1,ChildListener var2);
 
     void addStateListener(StateListener var1);
 

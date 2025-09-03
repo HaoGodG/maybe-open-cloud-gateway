@@ -17,11 +17,11 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * date 2025/9/2 10:50
  */
 @Slf4j
-public abstract class AbstractZookeeperClient <TargetChildListener> implements ZookeeperClient {
+public abstract class AbstractZookeeperClient<TargetChildListener> implements ZookeeperClient {
     private final String url;
-    private final Set<StateListener> stateListeners= new CopyOnWriteArraySet<>();
-    private final ConcurrentMap<String,ConcurrentMap<ChildListener,TargetChildListener>> childListeners= new ConcurrentHashMap<>()
-    private volatile boolean closed=false;
+    private final Set<StateListener> stateListeners = new CopyOnWriteArraySet<>();
+    private final ConcurrentMap<String, ConcurrentMap<ChildListener, TargetChildListener>> childListeners = new ConcurrentHashMap<>()
+    private volatile boolean closed = false;
 
     public AbstractZookeeperClient(String url) {
         this.url = url;
@@ -61,18 +61,18 @@ public abstract class AbstractZookeeperClient <TargetChildListener> implements Z
         ConcurrentMap<ChildListener, TargetChildListener> listeners = this.childListeners.get(path);
         if (listeners == null) {
             this.childListeners.putIfAbsent(path, new ConcurrentHashMap<>());
-            listeners=(ConcurrentMap)this.childListeners.get(path);
+            listeners = this.childListeners.get(path);
         }
         TargetChildListener targetListener = listeners.get(listener);
         if (targetListener == null) {
             listeners.putIfAbsent(listener, this.createTargetChildListener(path, listener));
             targetListener = listeners.get(listener);
         }
-        return this.addTargetChildListener(path,listener);
+        return this.addTargetChildListener(path, targetListener);
     }
 
     public void removeChildListener(String path, ChildListener listener) {
-        ConcurrentMap<ChildListener, TargetChildListener> listeners = (ConcurrentMap)this.childListeners.get(path);
+        ConcurrentMap<ChildListener, TargetChildListener> listeners = this.childListeners.get(path);
         if (listeners != null) {
             TargetChildListener targetListener = listeners.remove(listener);
             if (targetListener != null) {
@@ -84,15 +84,15 @@ public abstract class AbstractZookeeperClient <TargetChildListener> implements Z
     protected void stateChanged(int state) {
         Iterator var2 = this.stateListeners.iterator();
 
-        while   (var2.hasNext()) {
-            StateListener sessionListener = (StateListener)var2.next();
+        while (var2.hasNext()) {
+            StateListener sessionListener = (StateListener) var2.next();
             sessionListener.stateChanged(state);
         }
     }
 
     public void close() {
         if (!this.closed) {
-            this.closed=true;
+            this.closed = true;
             try {
                 this.doClose();
             } catch (Throwable var2) {
@@ -109,7 +109,7 @@ public abstract class AbstractZookeeperClient <TargetChildListener> implements Z
 
     protected abstract TargetChildListener createTargetChildListener(String var1, ChildListener var2);
 
-    protected abstract List<String> addTargetChildListener(String var1, ChildListener var2);
+    protected abstract List<String> addTargetChildListener(String var1, TargetChildListener var2);
 
     protected abstract void removeTargetChildListener(String var1, TargetChildListener var2);
 }

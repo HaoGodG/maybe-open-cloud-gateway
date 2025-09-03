@@ -5,6 +5,8 @@ import gateway.esc.startup.info.ESCStartInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import smartTerminal.com.dc.esb.startup.info.LoadItem;
+import smartTerminal.com.dc.esc.client.zookeeper.zklient.ZkClientZookeeperClient;
+import smartTerminal.com.dc.esc.client.zookeeper.zklient.ZkClientZookeeperTransporter;
 
 /**
  * author Hao
@@ -12,7 +14,7 @@ import smartTerminal.com.dc.esb.startup.info.LoadItem;
  */
 @Slf4j
 public class TerminalListener {
-    private static ZkclientZookeeperClient client=null;
+    private static ZkClientZookeeperClient client=null;
 
     public static void startListener(){
         Terminal config = Terminal.getInstance();
@@ -75,9 +77,9 @@ public class TerminalListener {
         }
     }
 
-    public static ZkclientZookeeperClient getClient(){
+    public static ZkClientZookeeperClient getClient(){
         if (client==null){
-            client=ZkClientZookeeperTransporter.getInstance().connect();
+            client= ZkClientZookeeperTransporter.getInstance().connect();
         }
         if (client.isConnected()){
             return client;

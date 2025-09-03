@@ -1,4 +1,4 @@
-package gateway.esc.client.factory.router;
+package gateway.esc.client.factory;
 
 import gateway.esc.client.factory.listener.TerminalListener;
 import lombok.extern.slf4j.Slf4j;

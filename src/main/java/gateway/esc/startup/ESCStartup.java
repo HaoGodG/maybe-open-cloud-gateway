@@ -1,5 +1,6 @@
 package gateway.esc.startup;
 
+import gateway.esc.client.factory.listener.TerminalListener;
 import gateway.esc.client.terminal.Terminal;
 import gateway.esc.startup.info.ESCStartInfo;
 import gateway.esc.terminal.cons.CfgKeyCons;
@@ -87,7 +88,7 @@ public class ESCStartup {
                     System.out.println("apollo.api.readTimeout :");
                     System.out.println("apollo.api.connTimeout :");
 
-                    TerminalListener.startListeners();
+                    TerminalListener.startListener();
                     System.out.println("Apollo client is started.");
 
                 } else {

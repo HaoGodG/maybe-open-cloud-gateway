@@ -55,4 +55,8 @@ public class Terminal {
 
 
     }
+
+    public TerminalUri getUri(){
+        return new TerminalUri(this.terminalId);
+    }
 }
