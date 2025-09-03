@@ -32,6 +32,12 @@ public class ESCStartInfo {
     private static List<LoadItem> _loadListener = new ArrayList<>();
     private static List<LoadItem> _specialProtocolRefresh = new ArrayList<>();
 
+    private static LoadItem _paramCenterRefresh = new LoadItem("ParamCenterRefresh","ParamCenterRefresh");
+
+    public static LoadItem getParamCenterRefresh(){
+        return _paramCenterRefresh;
+    }
+
 
 
 
