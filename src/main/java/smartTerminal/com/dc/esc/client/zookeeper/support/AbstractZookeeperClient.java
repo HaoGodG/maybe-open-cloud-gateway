@@ -20,7 +20,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public abstract class AbstractZookeeperClient<TargetChildListener> implements ZookeeperClient {
     private final String url;
     private final Set<StateListener> stateListeners = new CopyOnWriteArraySet<>();
-    private final ConcurrentMap<String, ConcurrentMap<ChildListener, TargetChildListener>> childListeners = new ConcurrentHashMap<>()
+    private final ConcurrentMap<String, ConcurrentMap<ChildListener, TargetChildListener>> childListeners = new ConcurrentHashMap<>();
     private volatile boolean closed = false;
 
     public AbstractZookeeperClient(String url) {
